@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            background-image: url(iconic.jpg) ;
+            background-repeat: no-repeat ;
+            background-size: 100% ;
+        }
+
+        .form{
+            background-color: rgba(44, 27, 132, 0.396);
+            border-radius: 10%;
+            margin: 100px;
+            padding: 20px;
+            width: 300px;
+            height: 300px;
+            text-align: center; 
+            backdrop-filter: blur(10px);
+        }
+        
+        .otpverify{
+            margin-top: 25px;
+            color: white;
+        }
+        img{
+            width: 100px;
+        }
+
+        input{
+            padding: 8px;
+            width: 100px;
+            height: 10px;
+            margin: auto;
+            margin-top: 10px;
+            display: block;
+        }
+
+        button{
+            padding: 8px;
+            width: 100px;
+            margin: auto;
+            margin-top: 10px;
+            color: white;
+            background-color: black;
+            font-weight: bold;
+            display: block;
+        }
+
+        button:hover{
+            background-color: darkblue;
+        }
+
+    </style>
+
+    <title>Send Mail</title>
+    <script src="https://smtpjs.com/v3/smtp.js">
+    </script>
+ 
+ <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const email = localStorage.getItem('userEmail'); 
+        if (email) {
+            sendOTP(email);  
+        }
+    });
+
+    function sendOTP(email) {
+        const otpverify = document.getElementById('otpverify');
+        const otp_inp = document.getElementById('otp_inp');
+        const otp_btn = document.getElementById('otp_btn');
+
+        let otp_val = Math.floor(Math.random() * 10000);
+        let emailbody = `
+            <h1>Welcome! </h1> <br>
+            <h2>Your OTP is </h2>${otp_val}
+        `;
+
+        Email.send({
+            SecureToken: "27470a48-060b-4a5d-975a-fbf324d9ac1a",
+            To: email,
+            From: "monzonjiwoo@gmail.com",
+            Subject: "Verification",
+            Body: emailbody
+        }).then(
+            message => {
+                if (message === "OK") {
+                    alert("OTP is sent to your email " + email);
+                }
+                otp_btn.addEventListener('click', () => {
+                    if (otp_inp.value == otp_val) {
+                        window.location.href = 'WELCOME.html';
+                    } else {
+                        alert("Invalid OTP");
+                    }
+                })
+            }
+        );
+    }
+</script>
+
+</head>
+ 
+<body>
+
+    <div class="form">
+        <img src="OIP.png" >
+        <div class="otpverify" onsubmit="">Check Email for the OTP
+            <input type="text" id="otp_inp" name="otp_inp" required>
+            <button type="button" id="otp_btn">Cofirm OTP</button>
+        </div>   
+    </div>
+</body>
+</html>

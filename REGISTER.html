@@ -1,0 +1,138 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(iconic.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100%;
+
+}
+
+.login-container {
+    max-width: 300px;
+    margin: auto;
+    padding: 50px;
+    padding-top: 0px;
+    
+}
+
+.box{
+    background-color: rgba(128, 128, 128, 0.7);
+    backdrop-filter: blur(3px);
+    border-radius: 3%;
+    width: 25%;
+    margin: auto;
+    margin-top: 10%;
+    height: 520px;
+
+}
+.logo {
+    display: block;
+    margin: auto;
+    width: 200px;
+}
+
+.login-register{
+    text-align: center;
+    margin-top: 5px;
+
+}
+
+.warning{
+    position: absolute;
+    margin-left: 130px;
+    font-size: small;
+    color: rgb(135, 0, 0);
+}
+
+label { 
+    display: block;
+    margin-bottom: 8px;
+    color: rgb(0, 0, 0);
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    margin:0%;
+    background-color: #4caf50;
+    border-radius: 10%;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 50%;
+    cursor: pointer;
+}
+img{
+    width: 150px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+    </style>
+<script>
+    function save(){
+        var username = document.getElementById('username').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var cpassword = document.getElementById('cpassword').value;
+        var warning = document.getElementById('warning');
+
+        if (password.length < 5 || !/\d/.test(password)) {
+            warning.innerText = 'Password must be at least 5 characters and include at least one number.';
+            return false;
+        }
+
+        if (cpassword != password){
+            warning.innerText = 'Password Not Match';
+            return false;
+        }
+        else{
+            localStorage.setItem('userN', username);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPass', password);
+
+            warning.innerText = '';
+            window.location.href = 'LOGIN.html'
+        }
+        return false;
+    }
+
+</script>
+
+    <title>Login Page</title>
+</head>
+<body>
+    <div class = "box">
+        <img class = "logo" src="aot_logo.png" >
+    <div class="login-container" >
+        <form action="/LOGIN.html" onsubmit="return save()">
+            <label for="Username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <label for="Email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <label for="cpassword">Confirm Password:</label>
+            <input type="password" id="cpassword" name="cpassword" required>
+            <div class = 'warning' id="warning"></div>
+            <button type="submit">Register</button>
+        </form>
+
+    </div>
+    </div>  
+
+</body>
+</html>

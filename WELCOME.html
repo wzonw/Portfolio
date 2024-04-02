@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(bertot.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-size: 150%;
+        }
+        h1{
+           color: white; 
+           width: 50%;
+        }
+
+        button{
+            margin-left:5%;
+            background-color: #000000;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgb(125, 20, 20);
+        }
+            </style>
+
+    <title>Welcome</title>
+</head>
+<body>
+    <h1 >!! 兵士よ、怒れ！兵士よ、叫べ！兵士よ、戦え！ WELCOME INSIDE THE WALLS, <span id="welcome-username"></span>!</h1>
+    <button type="button" onclick="redirectToLOGIN()">Log Out</button>
+    
+    <script>
+        var SUsername = localStorage.getItem('userN');
+        
+        document.getElementById('welcome-username').innerText = SUsername;
+    
+        function redirectToLOGIN(){
+            window.location.href = 'LOGIN.html'
+        }
+        
+    </script>
+</body>
+</html>
